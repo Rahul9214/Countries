@@ -4,16 +4,10 @@ function App() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("https://restcountries.com/v3.1/all");
-        const data = await res.json();
-        setCountries(data);
-      } catch (err) {
-        console.err("Error fetching data: ", err);
-      }
-    };
-    fetchData();
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => response.json())
+      .then((data) => setCountries(data))
+      .catch((error) => console.error("Error fetching data: ", error));
   }, []);
 
   const containerStyle = {
